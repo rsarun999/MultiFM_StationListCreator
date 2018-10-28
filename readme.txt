@@ -7,3 +7,10 @@
 6.Scripter scans the first 'n' entry based on user information and xx region code.
 	a. The scanned entries are inputs for the multi fm replication.
 	b. Ini file is used for accessing the basic setting template
+
+	also do
+	$wgGenerateThumbnailOnParse = true;
+	$wgMaxShellMemory = 524288;
+	$wgMaxShellTime   = ;
+	$wgUseInstantCommons  = false;
+	$wgMaxShellFileSize = 524288;

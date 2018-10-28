@@ -2,194 +2,136 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using ReadWriteCsv;
+using IniParser;
+using IniParser.Model;
+using System.Linq;
+using System.Globalization;
 
-namespace ReadWriteCsv
-{
-    /// <summary>
-    /// Class to store one CSV row
-    /// </summary>
-    public class CsvRow : List<string>
-    {
-        public string LineText { get; set; }
-    }
+//https://sourceforge.net/projects/nsis/ for source repacking
+//"dotnet add package ini-parser --version 2.5.2"  & for more in https://github.com/rickyah/ini-parser
+// dotnet add package System.Linq --version 4.3.0 
+// dotnet add package System.Globalization --version 4.3.0
 
-    /// <summary>
-    /// Class to write data to a CSV file
-    /// </summary>
-    public class CsvFileWriter : StreamWriter
-    {
-        public CsvFileWriter(Stream stream)
-            : base(stream)
-        {
-        }
-
-        public CsvFileWriter(string filename)
-            : base(filename)
-        {
-        }
-
-        /// <summary>
-        /// Writes a single row to a CSV file.
-        /// </summary>
-        /// <param name="row">The row to be written</param>
-        public void WriteRow(CsvRow row)
-        {
-            StringBuilder builder = new StringBuilder();
-            bool firstColumn = true;
-            foreach (string value in row)
-            {
-                // Add separator if this isn't the first value
-                if (!firstColumn)
-                    builder.Append(',');
-                // Implement special handling for values that contain comma or quote
-                // Enclose in quotes and double up any double quotes
-                if (value.IndexOfAny(new char[] { '"', ',' }) != -1)
-                    builder.AppendFormat("\"{0}\"", value.Replace("\"", "\"\""));
-                else
-                    builder.Append(value);
-                firstColumn = false;
-            }
-            row.LineText = builder.ToString();
-            WriteLine(row.LineText);
-        }
-    }
-
-    /// <summary>
-    /// Class to read data from a CSV file
-    /// </summary>
-    public class CsvFileReader : StreamReader
-    {
-        public CsvFileReader(Stream stream)
-            : base(stream)
-        {
-        }
-
-        public CsvFileReader(string filename)
-            : base(filename)
-        {
-        }
-
-        /// <summary>
-        /// Reads a row of data from a CSV file
-        /// </summary>
-        /// <param name="row"></param>
-        /// <returns></returns>
-        public bool ReadRow(CsvRow row)
-        {
-            row.LineText = ReadLine();
-            if (String.IsNullOrEmpty(row.LineText))
-                return false;
-
-            int pos = 0;
-            int rows = 0;
-
-            while (pos < row.LineText.Length)
-            {
-                string value;
-
-                // Special handling for quoted field
-                if (row.LineText[pos] == '"')
-                {
-                    // Skip initial quote
-                    pos++;
-
-                    // Parse quoted value
-                    int start = pos;
-                    while (pos < row.LineText.Length)
-                    {
-                        // Test for quote character
-                        if (row.LineText[pos] == '"')
-                        {
-                            // Found one
-                            pos++;
-
-                            // If two quotes together, keep one
-                            // Otherwise, indicates end of value
-                            if (pos >= row.LineText.Length || row.LineText[pos] != '"')
-                            {
-                                pos--;
-                                break;
-                            }
-                        }
-                        pos++;
-                    }
-                    value = row.LineText.Substring(start, pos - start);
-                    value = value.Replace("\"\"", "\"");
-                }
-                else
-                {
-                    // Parse unquoted value
-                    int start = pos;
-                    while (pos < row.LineText.Length && row.LineText[pos] != ',')
-                        pos++;
-                    value = row.LineText.Substring(start, pos - start);
-                }
-
-                // Add field to list
-                if (rows < row.Count)
-                    row[rows] = value;
-                else
-                    row.Add(value);
-                rows++;
-
-                // Eat up to and including next comma
-                while (pos < row.LineText.Length && row.LineText[pos] != ',')
-                    pos++;
-                if (pos < row.LineText.Length)
-                    pos++;
-            }
-            // Delete any unused items
-            while (row.Count > rows)
-                row.RemoveAt(rows);
-
-            // Return true if any columns read
-            return (row.Count > 0);
-        }
-    }
-}    
 namespace MultiFM_StationCreator
 {
     class Program
     {
         static void Main(string[] args)
         {
-            /* Console.WriteLine("Hello World!");
-            var app = new Excel.Application();
-            var workbook = app.Workbooks.Open("LUT.csv");
-            var sheet = workbook.Worksheets["MASTER"];
-            var c_code = Console.Read();
-            var range = (Excel.Range)sheet.Columns["A:A"];
-            var result = range.Find(c_code, LookAt: Excel.XlLookAt.xlWhole);
-            var address = result.Address;//cell address
-            var value = result.Value2;//cell value*/
-            //close or do something else       
-            // Read sample data from CSV file
-            using (CsvFileReader reader = new CsvFileReader("LUT.csv"))
+            //lists to store Country code, PI code & Programme Service name from Lookup table.
+            List<string> list_CC = new List<string>();
+            List<string> list_PI = new List<string>();
+            List<string> list_PSN = new List<string>();
+
+            //filtered PI & PSN containing only information related to country selected by the user.
+            List<string> firstFewPI = new List<string>();
+            List<string> firstFewPSN = new List<string>();
+
+            //lists to hold 34 frequencies from 88-107.8 MHz.
+            //use mod operator % if a station of more than 34 list size is needed.
+            List<string> list_random_FMfreq = new List<string>();
+
+            for (double i = 88; i <= 108; i += 0.6)
             {
-                CsvRow row = new CsvRow();
-                while (reader.ReadRow(row))
+                //convert double var to single decimal point var and copy to string of lists.
+                i = Math.Round(i, 1);
+                string str = i.ToString(CultureInfo.GetCultureInfo("en-GB"));
+                list_random_FMfreq.Add(str);
+            }
+
+            using (var reader = new StreamReader(@"LUT.csv"))
+            {
+                //read 1 time outside the while loop to skip reading the heading row !
+                reader.ReadLine();
+                while (!reader.EndOfStream)
                 {
-                    foreach (string s in row)
-                    {
-                        Console.Write(s);
-                        Console.Write(" ");
-                    }
-                    Console.WriteLine();
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    list_CC.Add(values[0]);
+                    list_PI.Add(values[2]);
+                    list_PSN.Add(values[3]);
+                }
+
+                //disabled routine to extract the distinct countries used in LUT table and construct windows form.
+                 
+                // Get distinct Country Code and convert into a list again.
+                List<string> list_Distinct_CC = new List<string>();
+
+                //lists to be available as input to the user in drop-down box.
+                list_Distinct_CC = list_CC.Distinct().ToList();
+            
+                foreach(var item in list_Distinct_CC)
+                {        
+                    string pre = "\"";
+                    string post = "\",";
+                    string merge = string.Concat(pre,item,post);
+
+                    Console.WriteLine(item);
+                } 
+            }
+            var search_CC_List = list_CC
+                     .Select((v, i) => new { Index = i, Value = v })
+                     .Where(x => x.Value == "DE")
+                     .Select(x => x.Index)
+                     .ToList();
+
+            foreach (var item in search_CC_List.Take(10))
+            {
+                firstFewPI.Add(list_PI[item]);
+                firstFewPSN.Add(list_PSN[item]);
+            }
+
+            string builder_channel = File.ReadAllText(@"builder_channel.txt", Encoding.UTF8);
+            string builder_rds = File.ReadAllText(@"builder_rds.txt", Encoding.UTF8);
+
+            var parser = new FileIniDataParser();
+            IniData data = parser.ReadFile("parser.ini");
+
+            foreach (var i in Enumerable.Range(1, 10))
+            {
+                string channel = String.Concat("channel.", i);
+                data.Sections.AddSection(channel);
+
+                string rds = String.Concat("rds.", i);
+                data.Sections.AddSection(rds);
+            }
+
+            //routine to append channel & rds parameter text to parser ini file
+            using (var write = File.CreateText(@"merge_content.ini"))
+            {
+                foreach (var i in Enumerable.Range(1, 10))
+                {
+                    string channel = String.Concat("[channel.", i, "]");
+                    string rds = String.Concat("[rds.", i, "]");
+
+                    write.WriteLine(channel);
+                    write.WriteLine(builder_channel);
+
+                    write.WriteLine(rds);
+                    write.WriteLine(builder_rds);
                 }
             }
 
-            /* Write sample data to CSV file
-            using (CsvFileWriter writer = new CsvFileWriter("test.csv"))
+            foreach (var i in Enumerable.Range(1, 10))
             {
-                for (int i = 0; i < 100; i++)
-                {
-                    CsvRow row = new CsvRow();
-                    for (int j = 0; j < 5; j++)
-                        row.Add(String.Format("Column{0}", j));
-                    writer.WriteRow(row);
-                }
-            }*/
+                string channel = String.Concat("channel.", i);
+                string rds = String.Concat("rds.", i);
+
+                data[channel]["freq"] = list_random_FMfreq[i - 1];
+                data[channel]["idrds"] = i.ToString();
+
+                data[rds]["name"] = String.Concat("RDS_", i);
+                data[rds]["ps"] = firstFewPSN[i - 1];
+                data[rds]["pi"] = firstFewPI[i - 1];
+            }
+            //Save the file
+            parser.WriteFile("parser.ini", data);
+
+            var merge_parser = new IniParser.Parser.IniDataParser();
+
+            IniData user_config = merge_parser.Parse(File.ReadAllText("merge_content.ini"));
+            data.Merge(user_config);
         }
     }
 }
