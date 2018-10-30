@@ -44,7 +44,6 @@ ertb=1
 paid=19415
 eaid=25938
 page=0
-slow=0
 pin=0
 fused=false
 af=956 1011 920
