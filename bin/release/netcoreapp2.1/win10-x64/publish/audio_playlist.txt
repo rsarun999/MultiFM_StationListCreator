@@ -1,0 +1,13 @@
+[playlist.1]
+name=Ninja Tuna
+0=Kalimba.mp3
+
+[audio.1]
+name=Ninja Tuna
+used=1
+frq1=880
+frq2=880
+vol1=40
+vol2=40
+type=2
+file=Playlist.1

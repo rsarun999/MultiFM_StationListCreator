@@ -1,0 +1,12 @@
+gain=0
+volm=100
+used=1
+idaudio=1
+rate=44100
+mute=0
+emph=1
+mono=0
+devi=75
+auto=0
+aof=0
+att=dB

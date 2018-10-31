@@ -12,3 +12,17 @@ C:\Users\7500323\Documents\vs_repo\MultiFM_StationCreator\obj\release\netcoreapp
 C:\Users\7500323\Documents\vs_repo\MultiFM_StationCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.AssemblyInfo.cs
 C:\Users\7500323\Documents\vs_repo\MultiFM_StationCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.dll
 C:\Users\7500323\Documents\vs_repo\MultiFM_StationCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.pdb
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\hostpolicy.dll
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\hostfxr.dll
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.exe
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.deps.json
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.runtimeconfig.json
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.runtimeconfig.dev.json
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.dll
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.pdb
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.csprojAssemblyReference.cache
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.csproj.CoreCompileInputs.cache
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.AssemblyInfoInputs.cache
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.AssemblyInfo.cs
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.dll
+C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.pdb
