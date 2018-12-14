@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build LUT static testss",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g", "main.cpp", "RdsLookUpTable.cpp", "-o", "a.out"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
