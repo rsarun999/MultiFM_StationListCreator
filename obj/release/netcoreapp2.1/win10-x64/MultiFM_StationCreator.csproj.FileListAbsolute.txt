@@ -26,3 +26,17 @@ C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreap
 C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.AssemblyInfo.cs
 C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.dll
 C:\Users\rsaru\Documents\GitHub\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.pdb
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\hostpolicy.dll
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\hostfxr.dll
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.exe
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.deps.json
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.runtimeconfig.json
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.runtimeconfig.dev.json
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.dll
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\bin\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.pdb
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.csprojAssemblyReference.cache
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.csproj.CoreCompileInputs.cache
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.AssemblyInfoInputs.cache
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.AssemblyInfo.cs
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.dll
+C:\Users\7500323\Documents\vs_repo\multi_FM\MultiFM_StationListCreator\obj\release\netcoreapp2.1\win10-x64\MultiFM_StationCreator.pdb

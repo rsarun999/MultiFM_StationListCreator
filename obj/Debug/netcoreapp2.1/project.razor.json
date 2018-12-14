@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\7500323\\Documents\\vs_repo\\multi_FM\\MultiFM_StationListCreator\\MultiFM_StationCreator.csproj",
+  "TargetFramework": "netcoreapp2.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

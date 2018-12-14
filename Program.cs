@@ -21,9 +21,27 @@ namespace MultiFM_StationCreator {
         //public const string region = "GB";
         public const double freq_increment = 0.6;
     }
+
+    public static class IListExtensions {
+        /// <summary>
+        /// Shuffles the element order of the specified list.
+        /// </summary>
+        public static void Shuffle<T> (this IList<T> ts) {
+            var count = ts.Count;
+            var last = count - 1;
+            for (var i = 0; i < last; ++i) {
+                var r = UnityEngine.Random.Range (i, count);
+                var tmp = ts[i];
+                ts[i] = ts[r];
+                ts[r] = tmp;
+            }
+        }
+    }
+
     class Program {
         static void Main (string[] args) {
             //lists to store Country code, PI code & Programme Service name from Lookup table.
+            List<string> Master_List = new List<string> ();
             List<string> list_CC = new List<string> ();
             List<string> list_ECC = new List<string> ();
             List<string> list_PI = new List<string> ();
@@ -81,14 +99,19 @@ namespace MultiFM_StationCreator {
                 reader.ReadLine ();
                 while (!reader.EndOfStream) {
                     var line = reader.ReadLine ();
-                    var values = line.Split (',');
-
-                    list_CC.Add (values[0]);
-                    list_ECC.Add (values[1]);
-                    list_PI.Add (values[2]);
-                    list_PSN.Add (values[3]);
+                    Master_List.Add (line);
                 }
-                /*
+            }
+            IListExtensions.Shuffle (Master_List);
+            foreach (var item in Master_List) {
+                var values = item.Split (',');
+
+                list_CC.Add (values[0]);
+                list_ECC.Add (values[1]);
+                list_PI.Add (values[2]);
+                list_PSN.Add (values[3]);
+            }
+            /*
                 //disabled routine to extract the distinct countries used in LUT table and construct windows form.
                 // Get distinct Country Code and convert into a list again.
                 List<string> list_Distinct_CC = new List<string>();
@@ -104,7 +127,6 @@ namespace MultiFM_StationCreator {
 
                     Console.WriteLine(item);
                 } */
-            }
             var search_CC_List = list_CC
                 .Select ((v, i) => new { Index = i, Value = v })
                 .Where (x => x.Value == region)
@@ -125,7 +147,7 @@ namespace MultiFM_StationCreator {
                                 firstFewPI.Add (list_PI[item]);
                                 firstFewPSN.Add (list_PSN[item]);
                                 count++;
-                            }                            
+                            }
                         }
                     }
                 } else {

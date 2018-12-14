@@ -363,10 +363,11 @@
   },
   "libraries": {
     "ini-parser/2.5.2": {
-      "sha512": "hp3gKmC/14+6eKLgv7Jd1Z7OV86lO+tNfOXr/stQbwmRhdQuXVSvrRAuAe7G5+lwhkov0XkqZ8/bn1PYWMx6eg==",
+      "sha512": "4tTkVV6xAPuit4vwHeLdcwmLO2kRtWRE7TXKga5QQOdt2DPdtq00ADeXHOzO7hkNtcZpT7GbsvBd6jOiwGz0JQ==",
       "type": "package",
       "path": "ini-parser/2.5.2",
       "files": [
+        ".signature.p7s",
         "ini-parser.2.5.2.nupkg.sha512",
         "ini-parser.nuspec",
         "lib/net20/INIFileParser.dll",
@@ -1684,23 +1685,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\rsaru\\.nuget\\packages\\": {},
+    "C:\\Users\\7500323\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rsaru\\Documents\\GitHub\\MultiFM_StationListCreator\\MultiFM_StationCreator.csproj",
+      "projectUniqueName": "c:\\Users\\7500323\\Documents\\vs_repo\\multi_FM\\MultiFM_StationListCreator\\MultiFM_StationCreator.csproj",
       "projectName": "MultiFM_StationCreator",
-      "projectPath": "C:\\Users\\rsaru\\Documents\\GitHub\\MultiFM_StationListCreator\\MultiFM_StationCreator.csproj",
-      "packagesPath": "C:\\Users\\rsaru\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rsaru\\Documents\\GitHub\\MultiFM_StationListCreator\\obj\\",
+      "projectPath": "c:\\Users\\7500323\\Documents\\vs_repo\\multi_FM\\MultiFM_StationListCreator\\MultiFM_StationCreator.csproj",
+      "packagesPath": "C:\\Users\\7500323\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\7500323\\Documents\\vs_repo\\multi_FM\\MultiFM_StationListCreator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\rsaru\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\7500323\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
