@@ -12,6 +12,8 @@
 
 #include "RdsLookUpTable.h"
 
+RdsLookUpTable oRdsLookUpTable;
+
 void RdsLookUpTable::SaveRdsList(RDS_DB_LIST pRdsList[])
 {
 	uint32_t RdsListSize = (sizeof(RDS_DB_LIST)*MAX_RDS_DB);
@@ -68,15 +70,15 @@ void RdsLookUpTable::RDSListPiUpdate(uint16_t updatePi, uint8_t u8_Ecc)
 			memset(&RdsList[index], 0x00, sizeof(RDS_DB_LIST));
 			RdsList[index].Pi = updatePi;
 			//LOGV("++ [%s]: RdsList[index].Pi = updatePi:%d \r\n", __FUNCTION__,updatePi);
-			if (mRdsLUT->GetPiType(RdsList[index].Pi) != 2)
+			if (oRdsLookUpTable.GetPiType(RdsList[index].Pi) != 2)
 			{
-				RdsList[index].CN = mRdsLUT->GetCN(RdsList[index].Pi);
+				RdsList[index].CN = oRdsLookUpTable.GetCN(RdsList[index].Pi);
 			}
 			else
 			{
 				RdsList[index].CN = usedCountry();
 			}
-			duplication = mRdsLUT->GetPs(RdsList[index].Pi, RdsList[index].CN, RdsList[index].Ps);
+			duplication = oRdsLookUpTable.GetPs(RdsList[index].Pi, RdsList[index].CN, RdsList[index].Ps);
 			if (RdsList[index].Ps[0] != 0)
 			{
 				if (duplication == true)
@@ -115,15 +117,15 @@ void RdsLookUpTable::RDSListPiUpdate(uint16_t updatePi, uint8_t u8_Ecc)
 					memset(&RdsList[last].Af, 0x00, EXTENDED_AF);
 					/*Register PI*/
 					RdsList[last].Pi = updatePi;
-					if (mRdsLUT->GetPiType(RdsList[last].Pi) != 2)
+					if (oRdsLookUpTable.GetPiType(RdsList[last].Pi) != 2)
 					{
-						RdsList[last].CN = mRdsLUT->GetCN(RdsList[last].Pi);
+						RdsList[last].CN = oRdsLookUpTable.GetCN(RdsList[last].Pi);
 					}
 					else
 					{
 						RdsList[last].CN = usedCountry();
 					}
-					duplication = mRdsLUT->GetPs(RdsList[last].Pi, RdsList[last].CN, RdsList[last].Ps);
+					duplication = oRdsLookUpTable.GetPs(RdsList[last].Pi, RdsList[last].CN, RdsList[last].Ps);
 					if (RdsList[last].Ps[0] != 0)
 					{
 						if (duplication == true)
@@ -166,7 +168,7 @@ uint8_t RdsLookUpTable::usedCountry()
 	{
 		int count = 1;
 		for (int j = i + 1; j < MAX_RDS_DB; j++)
-			if ((RdsList[i].CN == RdsList[j].CN) && (mRdsLUT->GetPiType(RdsList[i].Pi) == 0) && (mRdsLUT->GetPiType(RdsList[j].Pi) == 0))
+			if ((RdsList[i].CN == RdsList[j].CN) && (oRdsLookUpTable.GetPiType(RdsList[i].Pi) == 0) && (oRdsLookUpTable.GetPiType(RdsList[j].Pi) == 0))
 				count++;
 		if (count > max_count)
 			max_count = count;
@@ -176,17 +178,21 @@ uint8_t RdsLookUpTable::usedCountry()
 	{
 		int count = 1;
 		for (int j = i + 1; j < MAX_RDS_DB; j++)
-			if ((RdsList[i].CN == RdsList[j].CN) && (mRdsLUT->GetPiType(RdsList[i].Pi) == 0) && (mRdsLUT->GetPiType(RdsList[j].Pi) == 0))
+			if ((RdsList[i].CN == RdsList[j].CN) && (oRdsLookUpTable.GetPiType(RdsList[i].Pi) == 0) && (oRdsLookUpTable.GetPiType(RdsList[j].Pi) == 0))
 				count++;
 		if (count == max_count)
+		{
+			cout<<"max count:"<<max_count<<"max CN:"<<RdsList[i].CN<<endl;
 			return RdsList[i].CN;
+		}			
 	}
 	return 1;
 }
 
 RdsLookUpTable::RdsLookUpTable()
 {
-	//mRdsLUT = nullptr;
+	mRdsLUT = nullptr;
+	cout<<"constructor"<<endl;
 	//ALOGV("++ [%s] is called \r\n", __FUNCTION__);
 }
 
@@ -200,7 +206,7 @@ void RdsLookUpTable::UpdateLUT(uint16_t u16_PI, uint8_t CN, uint8_t PsName[])
 
 	if (IsInitialized == 1)
 	{
-		if (mRdsLUT_table != nullptr)
+		if (IsInitialized == 1)
 		{
 			RDS_LUT *pTarget = nullptr;
 			uint32_t u32_Duplication = 0;
@@ -221,6 +227,7 @@ void RdsLookUpTable::UpdateLUT(uint16_t u16_PI, uint8_t CN, uint8_t PsName[])
 							pTarget->PsName[u8_cnt2] = PsName[u8_cnt2];
 						}
 						update = 1;
+						cout<<"updated flag"<<endl;
 						//ALOGV("++ [%s] update single PI PS to LUT:%s \r\n", __FUNCTION__,PsName);
 						break;
 					}

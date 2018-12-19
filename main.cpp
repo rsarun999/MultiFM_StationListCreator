@@ -12,11 +12,12 @@ int main ()
 	mRdsLUT1.InitLUT();
 	
 	//test vectors
-	mRdsLUT1.RDSListPiUpdate(0x1001, 0xE0);
-	//mRdsLUT1.RDSListPiUpdate(0x1201, 0xE0);
+	mRdsLUT1.RDSListPiUpdate(0x1003, 0xE0);
+	mRdsLUT1.RDSListPiUpdate(0x1002, 0xE0);
+	mRdsLUT1.RDSListPiUpdate(0x1005, 0xE0);
 	
 	//update LUT call
-	//mRdsLUT1.UpdateLUT(0x1001, mRdsLUT1.usedCountry(), ptr);
+	mRdsLUT1.UpdateLUT(0x1005, mRdsLUT1.usedCountry(), ptr);
 
     return 0;
 } 

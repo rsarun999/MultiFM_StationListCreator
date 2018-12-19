@@ -40,7 +40,7 @@ class RdsLookUpTable
     	return os ;
     }
 
-	RdsLookUpTable* mRdsLUT;
+	//RdsLookUpTable* mRdsLUT;
 	RdsLookUpTable();
 
 	typedef struct _rds_list 
@@ -68,7 +68,7 @@ class RdsLookUpTable
     RDS_DB_LIST* mRdsList;	
 	RdsStruct Rds;
 	RDS_DB_LIST RdsList[MAX_RDS_DB];
-	RDS_LUT* mRdsLUT_table;
+	RDS_LUT* mRdsLUT;
 	//void Rds_ReferToLUT(RDS_LIST* pRdsList, RDS_NVM_LIST* pRdsNVMList,uint8_t u8_Ecc);
 
 	uint8_t IsInitialized;
